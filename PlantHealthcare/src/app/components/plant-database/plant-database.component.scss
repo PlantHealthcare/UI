@@ -1,0 +1,31 @@
+p-card {
+  width: 20em; // make the card 80% of its original width
+  margin: 10px; // add a margin of 10px around the card
+  display: flex;
+  height:30em;
+  .p-card-title {
+    font-size: 18px; // reduce the font size
+    font-weight: bold;
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+  .p-tag {
+    margin-top: 10px;
+  }
+}
+.plant-grid{
+  display: flex;
+  flex-wrap: wrap;
+}
+.p-inputtext {
+  margin: 0;
+  width: 60%;
+}
+.header{
+  display: flex;
+  padding:0.5em;
+  background: lightgrey;
+  justify-content: space-around;
+}

@@ -12,7 +12,7 @@ export class MenuComponent implements OnInit{
   ngOnInit() {
     this.items = [
       { label: 'Profile', icon: 'pi pi-user', routerLink: ['/profile'] },
-      { label: 'Plants', icon: 'pi pi-leaf', routerLink: ['/plants'] },
+      { label: 'Plants', icon: 'pi pi-box', routerLink: ['/plants'] },
       { label: 'Test', icon: 'pi pi-check-square', routerLink: ['/test'] }
     ];
   }

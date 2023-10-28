@@ -1,1 +1,20 @@
-<p>plant-database works!</p>
+<div class="header">
+  <input pInputText type="text" placeholder="Search" (input)="onSearch($event)"/>
+  <button pButton (click)="addPlant()">
+    Add new plant
+  </button>
+</div>
+<div class="plant-grid">
+  <ng-container *ngFor="let plant of plants">
+    <div>
+      <p-card title="{{ plant.name }}">
+        <h5>{{ plant.name }}</h5>
+        <div>
+          <img class="w-9 shadow-2 border-round" [src]="plant.image" [alt]="plant.name" />
+        </div>
+        <div>{{ plant.description }}</div>
+        <p-tag [value]="plant.careNeeded ? 'Care Needed' : 'No Care Needed'" [severity]="plant.careNeeded ? 'danger' : 'success'"></p-tag>
+      </p-card>
+    </div>
+  </ng-container>
+</div>

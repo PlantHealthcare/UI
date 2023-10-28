@@ -12,6 +12,10 @@ import {MenubarModule} from "primeng/menubar";
 import { PlantDatabaseComponent } from './components/plant-database/plant-database.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { TestComponent } from './components/test/test.component';
+import {TagModule} from "primeng/tag";
+import {DataViewModule} from "primeng/dataview";
+import {CardModule} from "primeng/card";
+import {InputTextModule} from "primeng/inputtext";
 
 @NgModule({
   declarations: [
@@ -28,7 +32,14 @@ import { TestComponent } from './components/test/test.component';
     ButtonModule,
     MenuModule,
     MegaMenuModule,
-    MenubarModule
+    MenubarModule,
+    TagModule,
+    DataViewModule,
+    CardModule,
+    InputTextModule
+  ],
+  exports: [
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
