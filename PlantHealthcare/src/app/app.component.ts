@@ -8,7 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'PlantHealthcare';
 
-  test() {
-    console.log('this button will make an IOT stuff lit up')
-  }
 }
