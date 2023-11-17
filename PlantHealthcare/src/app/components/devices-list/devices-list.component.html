@@ -1,0 +1,19 @@
+<p-table [value]="devices">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-device>
+    <tr>
+      <td>{{device.name}}</td>
+      <td>{{device.type}}</td>
+      <td>
+        <p-button label="Remove" icon="pi pi-times" styleClass="p-button-warning" (click)="removeDevice(device)"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-button label="Add Device" icon="pi pi-plus" styleClass="p-button-warning" (click)="addDevice()"></p-button>

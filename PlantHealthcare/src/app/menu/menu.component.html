@@ -5,4 +5,10 @@
       {{ item.label }}
     </a>
   </ng-template>
+  <ng-template pTemplate="end">
+    <a [routerLink]="logoutItem.routerLink">
+      <i [ngClass]="logoutItem.icon"></i>
+      {{ logoutItem.label }}
+    </a>
+  </ng-template>
 </p-menubar>

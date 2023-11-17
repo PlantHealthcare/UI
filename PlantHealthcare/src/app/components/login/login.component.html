@@ -1,0 +1,12 @@
+<form (ngSubmit)="onSubmit()">
+  <div class="p-field">
+    <label for="email">Username:</label>
+    <input  pInputText id="email" [(ngModel)]="email" name="username">
+  </div>
+  <div class="p-field">
+    <label for="password">Password:</label>
+    <input  pInputText id="password" [(ngModel)]="password" name="password">
+  </div>
+  <button pButton type="submit" label="Login"></button>
+  <button pButton type="button" label="Go to Register" (click)="goToRegister()"></button>
+</form>

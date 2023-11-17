@@ -16,6 +16,16 @@ import {TagModule} from "primeng/tag";
 import {DataViewModule} from "primeng/dataview";
 import {CardModule} from "primeng/card";
 import {InputTextModule} from "primeng/inputtext";
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import {FormsModule} from "@angular/forms";
+import {PasswordModule} from "primeng/password";
+import {TableModule} from "primeng/table";
+import {ImageModule} from "primeng/image";
+import {RippleModule} from "primeng/ripple";
+import { DevicesListComponent } from './components/devices-list/devices-list.component';
+import { DeviceFormComponent } from './components/device-form/device-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +33,12 @@ import {InputTextModule} from "primeng/inputtext";
     MenuComponent,
     PlantDatabaseComponent,
     UserProfileComponent,
-    TestComponent
+    TestComponent,
+    LoginComponent,
+    RegisterComponent,
+    UserListComponent,
+    DevicesListComponent,
+    DeviceFormComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +51,12 @@ import {InputTextModule} from "primeng/inputtext";
     TagModule,
     DataViewModule,
     CardModule,
-    InputTextModule
+    InputTextModule,
+    FormsModule,
+    PasswordModule,
+    TableModule,
+    ImageModule,
+    RippleModule
   ],
   exports: [
     ButtonModule
