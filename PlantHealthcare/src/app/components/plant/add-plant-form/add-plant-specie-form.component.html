@@ -1,0 +1,126 @@
+<div class="plant-form">
+  <div class="p-fluid p-formgrid p-justify-center form-div">
+    <div class="p-field">
+      <label for="alias">Alias</label>
+      <input [(ngModel)]="plantSpecie.alias" id="alias" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="blooming">Blooming</label>
+      <input [(ngModel)]="plantSpecie.blooming" id="blooming" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="category">Category</label>
+      <input [(ngModel)]="plantSpecie.category" id="category" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="color">Color</label>
+      <input [(ngModel)]="plantSpecie.color" id="color" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="description">Description</label>
+      <textarea [(ngModel)]="plantSpecie.description" cols="30" id="description" pInputTextarea rows="3"></textarea>
+    </div>
+    <div class="p-field">
+      <label for="fertilization">Fertilization</label>
+      <input [(ngModel)]="plantSpecie.fertilization" id="fertilization" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="imageUrl">Image URL</label>
+      <input [(ngModel)]="plantSpecie.imageURL" id="imageUrl" pInputText/>
+    </div>
+    <div *ngIf="plantSpecie.imageURL" class="p-field">
+      <p-image [src]="plantSpecie.imageURL" alt="Image" width="250"></p-image>
+    </div>
+    <div class="p-field">
+      <label for="maxEnvHumid">Max Environment Humidity</label>
+      <input [(ngModel)]="plantSpecie.min_env_humid" id="maxEnvHumid" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="size">Size</label>
+      <input [(ngModel)]="plantSpecie.size" id="size" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="soil">Soil</label>
+      <input [(ngModel)]="plantSpecie.soil" id="soil" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="sunlight">Sunlight</label>
+      <input [(ngModel)]="plantSpecie.sunlight" id="sunlight" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="watering">Watering</label>
+      <input [(ngModel)]="plantSpecie.watering" id="watering" pInputText/>
+    </div>
+    <div class="footer">
+      <p-button (click)="onSubmit()" label="Submit" styleClass="p-button-success" type="submit"></p-button>
+      <p-button (click)="back()" label="Back" styleClass="p-button-danger" type="button"></p-button>
+    </div>
+  </div>
+  <div class="p-fluid p-formgrid p-justify-center form-div">
+    <div class="p-field">
+      <label for="maxLightLux">Max Light Lux</label>
+      <input [(ngModel)]="plantSpecie.max_light_lux" id="maxLightLux" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="maxLightMmol">Max Light Mmol</label>
+      <input [(ngModel)]="plantSpecie.max_light_mmol" id="maxLightMmol" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="maxSoilEc">Max Soil Ec</label>
+      <input [(ngModel)]="plantSpecie.max_soil_ec" id="maxSoilEc" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="maxSoilMoist">Max Soil Moist</label>
+      <input [(ngModel)]="plantSpecie.max_soil_moist" id="maxSoilMoist" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="maxTemp">Max Temp</label>
+      <input [(ngModel)]="plantSpecie.max_temp" id="maxTemp" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="minEnvHumid">Min Environment Humidity</label>
+      <input [(ngModel)]="plantSpecie.min_env_humid" id="minEnvHumid" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="minLightLux">Min Light Lux</label>
+      <input [(ngModel)]="plantSpecie.min_light_lux" id="minLightLux" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="minLightMmol">Min Light Mmol</label>
+      <input [(ngModel)]="plantSpecie.min_light_mmol" id="minLightMmol" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="minSoilEc">Min Soil Ec</label>
+      <input [(ngModel)]="plantSpecie.min_soil_ec" id="minSoilEc" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="minSoilMoist">Min Soil Moist</label>
+      <input [(ngModel)]="plantSpecie.min_soil_moist" id="minSoilMoist" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="minTemp">Min Temp</label>
+      <input [(ngModel)]="plantSpecie.min_temp" id="minTemp" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="name">Name</label>
+      <input [(ngModel)]="plantSpecie.name" id="name" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="origin">Origin</label>
+      <input [(ngModel)]="plantSpecie.origin" id="origin" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="pid">PID</label>
+      <input [(ngModel)]="plantSpecie.pid" id="pid" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="production">Production</label>
+      <input [(ngModel)]="plantSpecie.production" id="production" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="pruning">Pruning</label>
+      <input [(ngModel)]="plantSpecie.pruning" id="pruning" pInputText/>
+    </div>
+  </div>
+
+</div>

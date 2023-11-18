@@ -15,15 +15,9 @@ export class DevicesListComponent implements OnInit{
   }
   async ngOnInit() {
     this.devices = await this.mongoService.listUserDevices();
-    this.devices = [
-      {name: 'Device 1', type: 'Type 1'},
-      {name: 'Device 2', type: 'Type 2'},
-      // Add more devices as needed
-    ];
   }
 
   removeDevice(device: any) {
-    // todo remowe device from database
     console.log(device)
   }
 
@@ -36,4 +30,5 @@ export class Device {
   name: string;
   type: string;
   id?: string;
+  user_id?: string;
 }

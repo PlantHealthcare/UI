@@ -27,9 +27,10 @@ import {RippleModule} from "primeng/ripple";
 import { DevicesListComponent } from './components/device/devices-list/devices-list.component';
 import { DeviceFormComponent } from './components/device/device-form/device-form.component';
 import {DropdownModule} from "primeng/dropdown";
-import { AddPlantFormComponent } from './components/plant/add-plant-form/add-plant-form.component';
+import { AddPlantSpecieFormComponent } from './components/plant/add-plant-form/add-plant-specie-form.component';
 import { UserPlantsComponent } from './components/plant/user-plants/user-plants.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
+import { UserPlantFormComponent } from './components/plant/user-plant-form/user-plant-form.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,9 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     UserListComponent,
     DevicesListComponent,
     DeviceFormComponent,
-    AddPlantFormComponent,
-    UserPlantsComponent
+    AddPlantSpecieFormComponent,
+    UserPlantsComponent,
+    UserPlantFormComponent
   ],
   imports: [
     BrowserModule,

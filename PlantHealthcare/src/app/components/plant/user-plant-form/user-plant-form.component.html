@@ -1,0 +1,37 @@
+<div class="plant-form">
+  <div class="p-fluid p-formgrid p-justify-center form-div">
+
+    <div class="p-field">
+      <label for="name">Name</label>
+      <input [(ngModel)]="plant.name" id="name" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="light_mmol">Light mmol</label>
+      <input [(ngModel)]="plant.light_mmol" id="light_mmol" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="light_lux">Light lux</label>
+      <input [(ngModel)]="plant.light_lux" id="light_lux" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="temp">Temperature</label>
+      <input [(ngModel)]="plant.temp" id="temp" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="soil_moist">Soil Moisture</label>
+      <input [(ngModel)]="plant.soil_moist" id="soil_moist" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="soil_ec">Soil EC</label>
+      <input [(ngModel)]="plant.soil_ec" id="soil_ec" pInputText/>
+    </div>
+    <div class="p-field">
+      <label for="type">Type</label>
+      <p-dropdown [appendTo]="'body'" id="type" [options]="plantSpecies" [(ngModel)]="plant.plantspecies_id" [showClear]="true" [optionValue]="plantSpecies[0].plantspecies_id" optionLabel="label"></p-dropdown>
+    </div>
+    <div class="footer">
+      <p-button (click)="onSubmit()" label="Submit" styleClass="p-button-success" type="submit"></p-button>
+      <p-button (click)="back()" label="Back" styleClass="p-button-danger" type="button"></p-button>
+    </div>
+  </div>
+</div>

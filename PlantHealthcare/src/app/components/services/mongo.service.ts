@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import App = Realm.App;
-import {AuthService} from "./auth.service";
-import {Plant} from "../plant/plant-database/plant-database.component";
+import {Plant, PlantSpecies} from "../plant/plant-database/plant-database.component";
 import {Device} from "../device/devices-list/devices-list.component";
 import {User} from "../user/user-list/user-list.component";
+import App = Realm.App;
 
 @Injectable({
   providedIn: 'root'
@@ -29,45 +28,56 @@ export class MongoService {
     return await collection.find();
   }
 
-  async listPlants(): Promise<Plant[]> {
-    const collection = this.mongoConnection.db("PlantHealthcare").collection("plant-species");
+  async listPlantSpecies(): Promise<PlantSpecies[]> {
+    const collection = this.mongoConnection.db("PlantHealthcare").collection("plantspecies");
     return await collection.find();
   }
 
   async listUserPlants() {
-    const collection = this.mongoConnection.db("PlantHealthcare").collection("user-plants");
-    const id = this.userValue.id;
-    return await collection.find({user_id: this.userValue.id});
+    const collection = this.mongoConnection.db("PlantHealthcare").collection("userplants");
+    const id = this.userValue.user_id;
+    return await collection.find({user_id: this.userValue.user_id});
+  }
+
+  async addPlantSpecie(plantSpecie: PlantSpecies) {
+    const collection = this.mongoConnection.db("PlantHealthcare").collection("plantspecies");
+    return await collection.insertOne({ ...plantSpecie});
+  }
+
+  async getPlantSpecieTypes() {
+   /* const collection = this.mongoConnection.db("PlantHealthcare").collection("plantspecies");
+    return await collection.insertOne({ ...plantSpecie});*/
+    return [{label:'plant1', plantspecies_id : '1'},{label:'plant2', plantspecies_id : '2'},{label:'plant3', plantspecies_id : '3'}]
   }
 
   async addUserPlant(plant: Plant) {
-    const collection_user_plants = this.mongoConnection.db("PlantHealthcare").collection("user-plants");
-    const collection_plants = this.mongoConnection.db("PlantHealthcare").collection("plants");
+    const collection_user_plants = this.mongoConnection.db("PlantHealthcare").collection("userplants");
     await collection_user_plants.insertOne({...plant});
-    await collection_plants.insertOne({...plant});
   }
 
 /*  async deleteUserPlant(device: Device) {
     const collection = this.mongoConnection.db("PlantHealthcare").collection("devices");
-    const id = this.auth.userValue.id;
+    const id = this.auth.userValue.user_is;
     return await collection.insertOne({...device});
   }*/
 
   async listUserDevices() {
-    const collection = this.mongoConnection.db("PlantHealthcare").collection("devices");
-    const id = this.userValue.id;
-    return await collection.find({user_id: this.userValue.id});
+    const collection = this.mongoConnection.db("PlantHealthcare").collection("userdevices");
+    const id = this.userValue.user_id;
+    return await collection.find({user_id: this.userValue.user_id});
   }
 
   async addUserDevices(device: Device) {
-    const collection = this.mongoConnection.db("PlantHealthcare").collection("devices");
-    const id = this.userValue.id;
+    const collection = this.mongoConnection.db("PlantHealthcare").collection("userdevices");
+    const id = this.userValue.user_id;
     return await collection.insertOne({...device});
   }
 
   async deleteUserDevice(device: Device) {
-    const collection = this.mongoConnection.db("PlantHealthcare").collection("devices");
-    const id = this.userValue.id;
+    const collection = this.mongoConnection.db("PlantHealthcare").collection("userdevices");
+    const id = this.userValue.user_id;
     return await collection.deleteOne({ id: device.id});
   }
+
+
 }

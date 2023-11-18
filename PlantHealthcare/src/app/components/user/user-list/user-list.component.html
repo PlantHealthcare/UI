@@ -1,16 +1,16 @@
 <p-table [value]="users" [rowHover]="true">
   <ng-template pTemplate="header">
     <tr>
-      <th>Name</th>
-      <th>ID</th>
-      <th>Status</th>
+      <th>Email</th>
+      <th>User id</th>
+      <th>Role</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-user>
-    <tr [ngClass]="{'admin-row': user.status === 'admin'}">
-      <td>{{user.name}}</td>
-      <td>{{user.id}}</td>
-      <td>{{user.status}}</td>
+    <tr [ngClass]="{'admin-row': user.role === 'admin'}">
+      <td>{{user.email}}</td>
+      <td>{{user.user_id}}</td>
+      <td>{{user.role}}</td>
     </tr>
   </ng-template>
 </p-table>

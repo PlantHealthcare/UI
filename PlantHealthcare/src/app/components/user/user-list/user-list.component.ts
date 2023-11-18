@@ -12,20 +12,14 @@ export class UserListComponent implements OnInit {
   }
 
   async ngOnInit() {
-
-    const users = await this.mongoService.listUsers()
-    console.log(users);
-
-    this.users = [{email: 'test user1', id: 'asd', role: 'user'}, {
-      email: 'test user2', id: 'asd2', role: 'user'
-    }, {email: 'test user3', id: 'asd3', role: 'admin'},]
+    this.users = await this.mongoService.listUsers()
   }
 
 }
 export interface User {
-  id?: string,
+  user_id?: string,
   email: string,
   role: RoleType
 }
 
-export type RoleType = 'user'|'admin'
+export type RoleType = 'admin'|'default'

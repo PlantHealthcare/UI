@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {MongoService} from "../../services/mongo.service";
 
 @Component({
   selector: 'app-plant-database',
@@ -7,18 +8,14 @@ import {Router} from "@angular/router";
   styleUrls: ['./plant-database.component.scss']
 })
 export class PlantDatabaseComponent implements OnInit {
-  @Input() plants: Plant[];
-  displayedPlants: Plant[];
-  isUserPlants = false;
-  searchText: string = ''
-  constructor(private route: Router) {
+  plants: PlantSpecies[];
+  displayedPlants: PlantSpecies[];
+  searchText: string;
+  constructor(private route: Router, private mongo:MongoService) {
   }
 
-  ngOnInit(): void {
-    this.isUserPlants = !!this.plants;
-    if (!this.isUserPlants) {
-      this.initPlantsgrid();
-    }
+  async ngOnInit() {
+    this.plants = await this.mongo.listPlantSpecies();
     this.displayedPlants = this.plants;
   }
 
@@ -33,33 +30,51 @@ export class PlantDatabaseComponent implements OnInit {
   addPlant() {
     this.route.navigate(['/add-plant-form'])
   }
-
-  private initPlantsgrid() {
-    this.plants = [{
-      name: 'test1',
-      description: 'Description 1',
-      imageURL: 'https://hips.hearstapps.com/hmg-prod/images/boston-fern-6in-pdp-01-1200x-6488ad58cc341.jpeg',
-    }, {
-      name: 'noveny 2',
-      description: 'Description 2',
-      imageURL: 'https://hips.hearstapps.com/hmg-prod/images/boston-fern-6in-pdp-01-1200x-6488ad58cc341.jpeg',
-    }, {
-      name: 'liliom',
-      description: 'Description 3',
-      imageURL: 'https://hortology.co.uk/cdn/shop/products/Aspidistra-Cast-Iron-Plant-13x50cm-Moon-Plant-Pot-Jungle-15x13cm_c0c3f8bc-d5f1-4c65-a265-96183b87e40f.jpg?v=1667902675',
-    }];
-  }
 }
 
 export interface Plant {
-  name: string,
-  description: string,
-  imageURL: string,
-  careNeeded?: boolean,
+  _id?: string;
+  name: string;
+  light_mmol?: number;
+  light_lux?: number;
+  temp?: number;
+  soil_moist?: number;
+  soil_ec?: number;
+  plantspecies_id?: string;
+  user_id?: string;
+  imageURL?: string;
+  careNeeded?: boolean;
 }
 
-export interface PlantSpecie {
-  name: string,
-  description: string,
-  imageURL: string,
+
+export interface PlantSpecies {
+  alias: string;
+  blooming: string;
+  category: string;
+  color: string;
+  description: string;
+  fertilization: string;
+  imageURL: string;
+  max_env_humid: number;
+  max_light_lux: number;
+  max_light_mmol: number;
+  max_soil_ec: number;
+  max_soil_moist: number;
+  max_temp: number;
+  min_env_humid: number;
+  min_light_lux: number;
+  min_light_mmol: number;
+  min_soil_ec: number;
+  min_soil_moist: number;
+  min_temp: number;
+  name: string;
+  origin: string;
+  pid: string;
+  production: string;
+  pruning: string;
+  size: string;
+  soil: string;
+  sunlight: string;
+  watering: string;
 }
+
