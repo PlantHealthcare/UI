@@ -5,11 +5,11 @@
   </div>
   <div class="p-field">
     <label for="password">Password:</label>
-    <p-password id="password" [(ngModel)]="password" name="password"></p-password>
+    <p-password id="password" [(ngModel)]="password" name="password" style="width: 100%; display: flex"></p-password>
   </div>
   <div class="p-field">
     <label for="confirmPassword">Confirm Password</label>
     <input pInputText type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>
   </div>
-  <button pButton type="submit" label="Register" (click)="onSubmit()"></button>
+  <button pButton type="submit" [disabled]="confirmPassword !== password || !email || !confirmPassword || !password" label="Register" (click)="onSubmit()"></button>
 </form>

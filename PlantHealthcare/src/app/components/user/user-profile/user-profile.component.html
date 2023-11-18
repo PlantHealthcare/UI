@@ -9,9 +9,9 @@
             <p>{{ authService.userValue.status }}</p>
           </div>
           <div style="display:flex; justify-content: space-between">
-            <button pButton pRipple label="Set User Data" icon="pi pi-user" class="btn btn-primary"></button>
-            <p-button label="Plants" icon="pi pi-search" styleClass="p-button-success" ></p-button>
-            <p-button label="Devices" icon="pi pi-cog" styleClass="p-button-help"></p-button>
+            <p-button label="Set User Data" icon="pi pi-user" styleClass="p-button-primary"></p-button>
+            <p-button label="Plants" icon="pi pi-search" styleClass="p-button-success" (click)="redirectToPlants()" ></p-button>
+            <p-button label="Devices" icon="pi pi-cog" styleClass="p-button-help" (click)="redirectToDevices()"></p-button>
           </div>
         </div>
       </div>

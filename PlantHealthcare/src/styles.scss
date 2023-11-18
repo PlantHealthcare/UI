@@ -2,3 +2,40 @@
 @import "primeng/resources/primeng.css";
 @import '~primeicons/primeicons.css';
 @import "~bootstrap/dist/css/bootstrap.css";
+
+
+
+p-password {
+  width: 100% !important;
+  display: flex;
+
+  .p-inputtext {
+    width: 100% !important;
+  }
+  > div {
+    width: 100% !important;
+  }
+  .p-inputwrapper {
+    width: 100% !important;
+
+    .p-inputtext {
+      width: 100% !important;
+    }
+
+  }
+
+}
+
+.footer {
+  margin-top:2em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-div {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}

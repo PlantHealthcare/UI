@@ -1,0 +1,14 @@
+<div class="p-fluid p-formgrid p-justify-center form-div">
+  <div class="p-field">
+    <label for="name">Name</label>
+    <input pInputText id="name" [(ngModel)]="device.name" class="p-inputtext-sm p-inputtext-outlined" required>
+  </div>
+  <div class="p-field">
+    <label for="type">Type</label>
+    <p-dropdown [appendTo]="'body'" id="type" [options]="deviceTypes" [(ngModel)]="device.type" [showClear]="true" [optionValue]="deviceTypes[0].value" optionLabel="label"></p-dropdown>
+  </div>
+  <div class="footer">
+    <p-button label="Submit" icon="pi pi-check"  styleClass="p-button-success"  [disabled]="!device.name || device.name === ''" (click)="onSubmit()"></p-button>
+    <p-button label="Back" styleClass="p-button-danger" (click)="onBack()"></p-button>
+  </div>
+</div>
