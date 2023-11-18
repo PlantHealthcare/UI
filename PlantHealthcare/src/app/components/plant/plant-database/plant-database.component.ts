@@ -38,15 +38,15 @@ export class PlantDatabaseComponent implements OnInit {
     this.plants = [{
       name: 'test1',
       description: 'Description 1',
-      image: 'https://hips.hearstapps.com/hmg-prod/images/boston-fern-6in-pdp-01-1200x-6488ad58cc341.jpeg',
+      imageURL: 'https://hips.hearstapps.com/hmg-prod/images/boston-fern-6in-pdp-01-1200x-6488ad58cc341.jpeg',
     }, {
       name: 'noveny 2',
       description: 'Description 2',
-      image: 'https://hips.hearstapps.com/hmg-prod/images/boston-fern-6in-pdp-01-1200x-6488ad58cc341.jpeg',
+      imageURL: 'https://hips.hearstapps.com/hmg-prod/images/boston-fern-6in-pdp-01-1200x-6488ad58cc341.jpeg',
     }, {
       name: 'liliom',
       description: 'Description 3',
-      image: 'https://hortology.co.uk/cdn/shop/products/Aspidistra-Cast-Iron-Plant-13x50cm-Moon-Plant-Pot-Jungle-15x13cm_c0c3f8bc-d5f1-4c65-a265-96183b87e40f.jpg?v=1667902675',
+      imageURL: 'https://hortology.co.uk/cdn/shop/products/Aspidistra-Cast-Iron-Plant-13x50cm-Moon-Plant-Pot-Jungle-15x13cm_c0c3f8bc-d5f1-4c65-a265-96183b87e40f.jpg?v=1667902675',
     }];
   }
 }
@@ -54,6 +54,12 @@ export class PlantDatabaseComponent implements OnInit {
 export interface Plant {
   name: string,
   description: string,
-  image: string,
+  imageURL: string,
   careNeeded?: boolean,
+}
+
+export interface PlantSpecie {
+  name: string,
+  description: string,
+  imageURL: string,
 }

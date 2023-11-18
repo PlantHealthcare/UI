@@ -10,7 +10,7 @@
       <p-card title="{{ plant.name }}">
         <h5>{{ plant.name }}</h5>
         <div>
-          <img class="w-9 shadow-2 border-round" [src]="plant.image" [alt]="plant.name" />
+          <img class="w-9 shadow-2 border-round" [src]="plant.imageURL" [alt]="plant.name" />
         </div>
         <div>{{ plant.description }}</div>
         <p-tag *ngIf="plant.careNeeded !== undefined" [value]="plant.careNeeded ? 'Care Needed' : 'No Care Needed'" [severity]="plant.careNeeded ? 'danger' : 'success'"></p-tag>
