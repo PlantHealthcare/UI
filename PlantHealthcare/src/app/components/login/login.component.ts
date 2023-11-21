@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../services/auth.service";
+import {AuthService} from "../services/auth/auth.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -8,22 +8,27 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit{
+  isLoginMode = true
   email: string;
   password: string;
   message: string;
+  confirmPassword: string;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    this.authService.login(this.email, this.password);
+    if (this.isLoginMode) {
+      this.authService.login(this.email, this.password);
+    } else {
+      this.authService.register(this.email, this.password);
+    }
     this.router.navigate(['/plants']);
   }
 
-  goToRegister() {
-    this.router.navigate(['/register']);
+  switchLoginMode() {
+    this.isLoginMode = !this.isLoginMode;
   }
 
   ngOnInit(): void {
-    this.authService.isAuthenticated = false;
   }
 }

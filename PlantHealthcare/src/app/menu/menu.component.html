@@ -6,7 +6,7 @@
     </a>
   </ng-template>
   <ng-template pTemplate="end">
-    <a [routerLink]="logoutItem.routerLink">
+    <a [routerLink]="logoutItem.routerLink" (click)="authService.logOut()">
       <i [ngClass]="logoutItem.icon"></i>
       {{ logoutItem.label }}
     </a>

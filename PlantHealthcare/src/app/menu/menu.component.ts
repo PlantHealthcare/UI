@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
-import {AuthService} from "../components/services/auth.service";
+import {AuthService} from "../components/services/auth/auth.service";
 
 @Component({
   selector: 'app-menu',
@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
     icon: 'pi pi-power-off'
   };
 
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
   }
 
   ngOnInit() {
@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit {
       {label: 'Devices', icon: 'pi pi-cog', routerLink: ['/devices']},
       {label: 'plant database', icon: 'pi pi-check-square', routerLink: ['/plant-database']}
     ];
-    if (this.authService.isAdmin) {
+    if (this.authService.userValue.role === 'admin') {
       this.items.push({label: 'Users', icon: 'pi pi-cog', routerLink: ['/users']});
     }
   }

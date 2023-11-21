@@ -3,7 +3,7 @@ import {Device} from "../devices-list/devices-list.component";
 import {Router} from "@angular/router";
 import {Dropdown} from "primeng/dropdown";
 import {MongoService} from "../../services/mongo.service";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-device-form', templateUrl: './device-form.component.html', styleUrls: ['./device-form.component.scss']

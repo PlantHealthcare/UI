@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Plant} from "../plant-database/plant-database.component";
 import {MongoService} from "../../services/mongo.service";
 import {Router} from "@angular/router";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-user-plant-form',

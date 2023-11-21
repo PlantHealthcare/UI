@@ -22,6 +22,10 @@ export class MongoService {
 
   //endpoints
 
+ /* async getUserData() {
+    const collection = this.mongoConnection.db("PlantHealthcare").collection("users");
+    return await collection.find({user});
+  }*/
 
   async listUsers() {
     const collection = this.mongoConnection.db("PlantHealthcare").collection("users");

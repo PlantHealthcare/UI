@@ -17,7 +17,6 @@ import {DataViewModule} from "primeng/dataview";
 import {CardModule} from "primeng/card";
 import {InputTextModule} from "primeng/inputtext";
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/user/register/register.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import {FormsModule} from "@angular/forms";
 import {PasswordModule} from "primeng/password";
@@ -31,6 +30,7 @@ import { AddPlantSpecieFormComponent } from './components/plant/add-plant-form/a
 import { UserPlantsComponent } from './components/plant/user-plants/user-plants.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
 import { UserPlantFormComponent } from './components/plant/user-plant-form/user-plant-form.component';
+import {AuthGuard} from "./components/services/auth/auth.guard";
 
 @NgModule({
   declarations: [
@@ -40,7 +40,6 @@ import { UserPlantFormComponent } from './components/plant/user-plant-form/user-
     UserProfileComponent,
     TestComponent,
     LoginComponent,
-    RegisterComponent,
     UserListComponent,
     DevicesListComponent,
     DeviceFormComponent,
@@ -71,7 +70,7 @@ import { UserPlantFormComponent } from './components/plant/user-plant-form/user-
   exports: [
     ButtonModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
