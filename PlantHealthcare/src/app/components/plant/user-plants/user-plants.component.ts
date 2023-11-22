@@ -15,21 +15,8 @@ export class UserPlantsComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const data = await this.mongo.listUserPlants();
-    console.log(data)
-    this.plants = [{
-      name: 'test1',
-      imageURL: 'https://hips.hearstapps.com/hmg-prod/images/boston-fern-6in-pdp-01-1200x-6488ad58cc341.jpeg',
-      careNeeded: true
-    }, {
-      name: 'noveny 2',
-      imageURL: 'https://hips.hearstapps.com/hmg-prod/images/boston-fern-6in-pdp-01-1200x-6488ad58cc341.jpeg',
-      careNeeded: true
-    }, {
-      name: 'liliom',
-      imageURL: 'https://hortology.co.uk/cdn/shop/products/Aspidistra-Cast-Iron-Plant-13x50cm-Moon-Plant-Pot-Jungle-15x13cm_c0c3f8bc-d5f1-4c65-a265-96183b87e40f.jpg?v=1667902675',
-      careNeeded: false
-    }];
+    this.plants = await this.mongo.listUserPlants();
+    this.displayedPlants = this.plants;
   }
 
   onSearch() {

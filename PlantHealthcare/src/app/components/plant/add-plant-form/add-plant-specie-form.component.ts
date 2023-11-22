@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {MongoService} from "../../services/mongo.service";
 import {PlantSpecies} from "../plant-database/plant-database.component";
@@ -8,7 +8,7 @@ import {PlantSpecies} from "../plant-database/plant-database.component";
   templateUrl: './add-plant-specie-form.component.html',
   styleUrls: ['./add-plant-specie-form.component.scss']
 })
-export class AddPlantSpecieFormComponent {
+export class AddPlantSpecieFormComponent{
   plantSpecie:PlantSpecies = { name: "",
   description: "",
   imageURL: "https://hips.hearstapps.com/hmg-prod/images/boston-fern-6in-pdp-01-1200x-6488ad58cc341.jpeg",

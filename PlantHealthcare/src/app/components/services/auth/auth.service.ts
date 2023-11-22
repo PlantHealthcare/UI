@@ -26,7 +26,8 @@ export class AuthService {
     const app = new Realm.App({id: "planthealthcareapp-rmwdj"});
     const credentials = Realm.Credentials.emailPassword(email, password);
     this.user = await app.logIn(credentials);
-    this.userValue = {email: 'email', role: "admin"} // TODO
+    console.log(this.user.app.currentUser?.id)
+    this.userValue = {email: 'email', role: "admin", user_id: this.user.app.currentUser?.id}
     this.userSubject.next(this.userValue);
     this.mongoService.setDatabaseConnection(app, this.userValue)
   }
@@ -35,7 +36,8 @@ export class AuthService {
     const app = new Realm.App({id: "planthealthcareapp-rmwdj"});
     const credentials = Realm.Credentials.emailPassword(email, password);
     this.user = await app.logIn(credentials); //todo register
-    this.userValue = {email: 'email', role: "admin"}
+    console.log(this.user.app.currentUser?.id)
+    this.userValue = {email: 'email', role: "admin", user_id: this.user.app.currentUser?.id}
     this.userSubject.next(this.userValue)
     this.mongoService.setDatabaseConnection(app, this.userValue);
   }

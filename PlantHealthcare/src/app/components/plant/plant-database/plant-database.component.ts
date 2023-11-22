@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {MongoService} from "../../services/mongo.service";
+import {Device} from "../../device/devices-list/devices-list.component";
 
 @Component({
   selector: 'app-plant-database',
@@ -44,6 +45,8 @@ export interface Plant {
   user_id?: string;
   imageURL?: string;
   careNeeded?: boolean;
+  plantSpecie: PlantSpecies;
+  device: Device[]
 }
 
 

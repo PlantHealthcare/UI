@@ -31,6 +31,7 @@ import { UserPlantsComponent } from './components/plant/user-plants/user-plants.
 import {InputTextareaModule} from "primeng/inputtextarea";
 import { UserPlantFormComponent } from './components/plant/user-plant-form/user-plant-form.component';
 import {AuthGuard} from "./components/services/auth/auth.guard";
+import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {AuthGuard} from "./components/services/auth/auth.guard";
     ImageModule,
     RippleModule,
     DropdownModule,
-    InputTextareaModule
+    InputTextareaModule,
+    CheckboxModule
   ],
   exports: [
     ButtonModule

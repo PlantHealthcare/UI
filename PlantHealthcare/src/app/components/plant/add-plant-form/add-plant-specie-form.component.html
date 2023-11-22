@@ -1,6 +1,10 @@
 <div class="plant-form">
   <div class="p-fluid p-formgrid p-justify-center form-div">
     <div class="p-field">
+      <label for="name">Name</label>
+      <input [(ngModel)]="plantSpecie.name" id="name" pInputText/>
+    </div>
+    <div class="p-field">
       <label for="alias">Alias</label>
       <input [(ngModel)]="plantSpecie.alias" id="alias" pInputText/>
     </div>
@@ -100,10 +104,6 @@
     <div class="p-field">
       <label for="minTemp">Min Temp</label>
       <input [(ngModel)]="plantSpecie.min_temp" id="minTemp" pInputText/>
-    </div>
-    <div class="p-field">
-      <label for="name">Name</label>
-      <input [(ngModel)]="plantSpecie.name" id="name" pInputText/>
     </div>
     <div class="p-field">
       <label for="origin">Origin</label>

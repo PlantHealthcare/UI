@@ -10,12 +10,14 @@ import {AuthService} from "./components/services/auth/auth.service";
 export class AppComponent implements OnInit{
   title = 'PlantHealthcare';
   user: User;
-
+  isAuthenticated = false;
 
   constructor(public authService : AuthService) {
   }
   ngOnInit(): void {
+  this.authService.userSubject.subscribe( usr => this.isAuthenticated = !!usr
 
+  )
   }
 
 }

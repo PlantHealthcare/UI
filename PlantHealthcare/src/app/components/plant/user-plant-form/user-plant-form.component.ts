@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Plant} from "../plant-database/plant-database.component";
 import {MongoService} from "../../services/mongo.service";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
+import {Device} from "../../device/devices-list/devices-list.component";
+import {PlantSpecies} from "../plant-database/plant-database.component";
 
 @Component({
   selector: 'app-user-plant-form',
@@ -10,24 +11,30 @@ import {AuthService} from "../../services/auth/auth.service";
   styleUrls: ['./user-plant-form.component.scss']
 })
 export class UserPlantFormComponent implements OnInit {
-  plant: Plant = {
-    name: '',
-    light_mmol: 0,
-    light_lux: 0,
-    temp: 0,
-    soil_moist: 0,
-    soil_ec: 0,
-    plantspecies_id: '',
-    user_id: this.auth.userValue.user_id,
-    careNeeded: false
-  };
-  plantSpecies: { label: string, plantspecies_id: string }[] = [];
-
+  userPlantRequest: any;
+  plantSpecies: PlantSpecies[] = [];
+  choosenPlantSpiece: PlantSpecies
+  devices:Device[] = [];
+  plantName = ''
+  selectedDevices: Device[];
   constructor(private mongo: MongoService, private route: Router, private auth: AuthService) {
   }
 
+  async ngOnInit() {
+    this.plantSpecies = await this.mongo.getPlantSpecies();
+    this.devices = await this.mongo.listUserDevices();
+    console.log(this.devices)
+    this.choosenPlantSpiece = this.plantSpecies[0];
+  }
+
   async onSubmit() {
-    await this.mongo.addUserPlant(this.plant);
+    this.userPlantRequest = {
+      name: this.plantName,
+      plantSpecie: this.choosenPlantSpiece,
+      devices: this.selectedDevices,
+      user_id: this.auth.userValue.user_id
+    }
+    await this.mongo.addUserPlant(this.userPlantRequest);
     this.route.navigate(['/plants'])
 
   }
@@ -36,7 +43,11 @@ export class UserPlantFormComponent implements OnInit {
     this.route.navigate(['/plants'])
   }
 
-  async ngOnInit() {
-    this.plantSpecies = await this.mongo.getPlantSpecieTypes();
-  }
+}
+
+export interface UserPlantRequest {
+  name: string,
+  plantSpecie: PlantSpecies,
+  devices: any [],
+  user_id:string
 }
