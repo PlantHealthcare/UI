@@ -1,23 +1,23 @@
-<form (ngSubmit)="onSubmit()" *ngIf="isLoginMode">
+<form (ngSubmit)="onSubmit()" *ngIf="isLoginMode" #loginForm="ngForm">
   <div class="p-field">
     <label for="email">Username:</label>
-    <input [(ngModel)]="email" id="email" name="username" pInputText>
+    <input required email [(ngModel)]="email" id="email" name="username" pInputText>
   </div>
   <div class="p-field">
     <label for="password">Password:</label>
-    <input [(ngModel)]="password" id="password" name="password" pInputText>
+    <input [(ngModel)]="password" required id="password" name="password" pInputText>
   </div>
   <div class="footer">
-    <button [disabled]="email && password" label="Login" pButton type="submit"></button>
+    <button [disabled]="loginForm.invalid" label="Login" pButton type="submit"></button>
     <button (click)="switchLoginMode()" label="Go to Register" pButton type="button"></button>
   </div>
 
 </form>
 
-<form (ngSubmit)="onSubmit()" *ngIf="!isLoginMode">
+<form (ngSubmit)="onSubmit()" *ngIf="!isLoginMode" #registerForm="ngForm">
   <div class="p-field">
     <label>Username:</label>
-    <input [(ngModel)]="email" name="username" pInputText>
+    <input [(ngModel)]="email" name="username" pInputText required>
   </div>
   <div class="p-field">
     <label>Password:</label>
@@ -29,7 +29,7 @@
            type="password">
   </div>
   <div class="footer">
-    <button (click)="onSubmit()" [disabled]="confirmPassword !== password || !email || !confirmPassword || !password"
+    <button (click)="onSubmit()" [disabled]="confirmPassword !== password || registerForm.invalid"
             label="Register"
             pButton type="submit"></button>
     <button (click)="switchLoginMode()" label="Go to Login" pButton type="button"></button>

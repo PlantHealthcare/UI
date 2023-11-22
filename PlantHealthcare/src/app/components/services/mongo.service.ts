@@ -14,15 +14,19 @@ export class MongoService {
   constructor() {
   }
 
-  setDatabaseConnection(app: App<Realm.DefaultFunctionsFactory & Realm.BaseFunctionsFactory, SimpleObject>, user:User) {
+  async setDatabaseConnection(app: App<Realm.DefaultFunctionsFactory & Realm.BaseFunctionsFactory, SimpleObject>, user: User) {
     this.userValue = user;
     if (app.currentUser) {
-      this.mongoConnection = app.currentUser.mongoClient("mongodb-atlas");
+      this.mongoConnection = await app.currentUser.mongoClient("mongodb-atlas");
     }
   }
 
   //endpoints
 
+
+  async getForUser(id: string) {
+    return await this.mongoConnection.db("PlantHealthcare").collection("users").findOne({user_id: id});
+  }
   async listUsers() {
     const collection = this.mongoConnection.db("PlantHealthcare").collection("users");
     return await collection.find();
@@ -63,29 +67,20 @@ export class MongoService {
     return await collection.insertOne({...device});
   }
 
-  /*  async deleteUserPlant(device: Device) {
-      const collection = this.mongoConnection.db("PlantHealthcare").collection("devices");
-      const id = this.auth.userValue.user_is;
-      return await collection.insertOne({...device});
-    }*/
-
-  async getDeviceTypes(): Promise<{ name: string, id: string }[]> {
-    //todo
-    return [{name: 'a-type', id: 'a-type'}, {name: 'b-type', id: 'b-type'}, {name: 'c-type', id: 'c-type'}]
-  }
-
-
-
-
-
-  async deleteUserDevice(device: Device) {
-    const collection = this.mongoConnection.db("PlantHealthcare").collection("userdevices");
-    return await collection.deleteOne({ id: device.id});
-  }
-
-
   async removeUser(userId: string) {
     const collection = this.mongoConnection.db("PlantHealthcare").collection("users");
     return await collection.deleteOne({user_id: userId});
+  }
+
+  setUserValue(userValue: User) {
+    this.userValue = userValue;
+  }
+
+  updateUserRole(user: User) {
+    const collection = this.mongoConnection.db("PlantHealthcare").collection("users");
+    collection.updateOne(
+      { user_id: user.user_id }, // filter
+      { $set: { role: user.role } } // update
+    )
   }
 }

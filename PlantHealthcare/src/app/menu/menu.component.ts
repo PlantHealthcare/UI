@@ -21,13 +21,11 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {label: 'Profile', icon: 'pi pi-user', routerLink: ['/profile']},
-      {label: 'Plants', icon: 'pi pi-box', routerLink: ['/plants']},
+      {label: 'Plants', icon: 'pi pi-box', routerLink: ['/plants'], visible: this.authService.userRole ==='admin' || this.authService.userRole ==='default'},
       {label: 'Test', icon: 'pi pi-check-square', routerLink: ['/test']},
-      {label: 'Devices', icon: 'pi pi-cog', routerLink: ['/devices']},
-      {label: 'plant database', icon: 'pi pi-check-square', routerLink: ['/plant-database']}
+      {label: 'Devices', icon: 'pi pi-cog', routerLink: ['/devices'], visible: this.authService.userRole ==='admin'},
+      {label: 'Plant database', icon: 'pi pi-check-square', routerLink: ['/plant-database']},
+      {label: 'Users', icon: 'pi pi-cog', routerLink: ['/users'], visible: this.authService.userRole ==='admin'}
     ];
-    if (this.authService.userValue.role === 'admin') {
-      this.items.push({label: 'Users', icon: 'pi pi-cog', routerLink: ['/users']});
-    }
   }
 }

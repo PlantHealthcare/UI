@@ -3,7 +3,7 @@
     <tr>
       <th>Email</th>
       <th>User id</th>
-      <th>Role</th>
+      <th style="width: 5em">Role</th>
       <th></th>
     </tr>
   </ng-template>
@@ -11,7 +11,7 @@
     <tr [ngClass]="{'admin-row': user.role === 'admin'}">
       <td>{{user.email}}</td>
       <td>{{user.user_id}}</td>
-      <td>{{user.role}}</td>
+      <td ><p-dropdown *ngIf="user.user_id !== auth.userValue.user_id" [style]="{'width':'30em'}" [appendTo]="'body'" [options]="roles" [(ngModel)]="user.role" (ngModelChange)="changeRole(user)" [showClear]="true" [optionValue]="'value'" optionLabel="label"></p-dropdown></td>
       <td><p-button [disabled]="user.role === 'admin'" label="Remove" icon="pi pi-times" styleClass="p-button-warning" (click)="removeUser(user.user_id)"></p-button></td>
     </tr>
   </ng-template>

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {MongoService} from "../../services/mongo.service";
 import {Device} from "../../device/devices-list/devices-list.component";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-plant-database',
@@ -12,7 +13,7 @@ export class PlantDatabaseComponent implements OnInit {
   plants: PlantSpecies[];
   displayedPlants: PlantSpecies[];
   searchText: string;
-  constructor(private route: Router, private mongo:MongoService) {
+  constructor(private route: Router, private mongo:MongoService, public authService: AuthService) {
   }
 
   async ngOnInit() {
