@@ -12,16 +12,12 @@
       <p-dropdown [(ngModel)]="choosenPlantSpiece" [appendTo]="'body'" [options]="plantSpecies" [showClear]="true"
                   id="type" optionLabel="name"></p-dropdown>
     </div>
-
-
     <div *ngFor="let device of devices" style="margin-top: 3em">
       <div style="display: flex; gap:1em">
-        <label [for]="device.id+''">{{device.name}}:</label>
+        <label style="margin-bottom: 0" [for]="device.id+''">{{device.name}}:</label>
         <p-checkbox [(ngModel)]="selectedDevices" [inputId]="device.id+''" name="group1" [value]="device"></p-checkbox>
       </div>
     </div>
-
-
     <div class="footer">
       <p-button (click)="onSubmit()" label="Submit" styleClass="p-button-success" type="submit"></p-button>
       <p-button (click)="back()" label="Back" styleClass="p-button-danger" type="button"></p-button>

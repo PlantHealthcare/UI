@@ -12,7 +12,12 @@ export class UserListComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.users = await this.mongoService.listUsers()
+    this.users = await this.mongoService.listUsers();
+  }
+
+  async removeUser(userId:string){
+    await this.mongoService.removeUser(userId);
+    this.users = await this.mongoService.listUsers();
   }
 
 }

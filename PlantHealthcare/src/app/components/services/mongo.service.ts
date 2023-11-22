@@ -80,9 +80,12 @@ export class MongoService {
 
   async deleteUserDevice(device: Device) {
     const collection = this.mongoConnection.db("PlantHealthcare").collection("userdevices");
-    const id = this.userValue.user_id;
     return await collection.deleteOne({ id: device.id});
   }
 
 
+  async removeUser(userId: string) {
+    const collection = this.mongoConnection.db("PlantHealthcare").collection("users");
+    return await collection.deleteOne({user_id: userId});
+  }
 }
