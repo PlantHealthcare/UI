@@ -8,12 +8,27 @@
   <ng-container *ngFor="let plant of displayedPlants">
     <div>
       <p-card title="{{ plant.name }}">
-        <h5>{{ plant.name }}</h5>
-        <div>
-          <img class="w-9 shadow-2 border-round" [src]="plant.plantSpecie.imageURL" [alt]="plant.name" />
+        <div class="header-in-card">
+          <h5>{{ plant.name }}</h5>
+          <p-button (click)="deletePlant(plant._id)" [style]="{'padding':'0', 'height':'1.5em', 'width':'1.5em'}"
+                    icon="pi pi-times" styleClass="p-button-danger"></p-button>
         </div>
-        <div>{{ plant.temp }}</div>
-        <p-tag *ngIf="plant.careNeeded !== undefined" [value]="plant.careNeeded ? 'Care Needed' : 'No Care Needed'" [severity]="plant.careNeeded ? 'danger' : 'success'"></p-tag>
+        <div>
+          <img (click)="modifyPlant(plant._id)" [alt]="plant.name" [src]="plant.plantSpecie.imageURL"
+               class="w-9 shadow-2 border-round"/>
+        </div>
+        <div class="plant-data-div">
+          <div>
+            <h4>Status</h4>
+            <div> Temperature: {{ plant.temperature }}</div>
+            <div> Humidity: {{ plant.humidity }}</div>
+            <div> Light: {{ plant.light }}</div>
+          </div>
+          <p-tag *ngIf="plant.careNeeded !== undefined" [severity]="plant.careNeeded ? 'danger' : 'success'"
+                 [style]="{'margin-left': '2em','margin-top':'2em',}"
+                 [value]="plant.careNeeded ? 'Care Needed' : 'No Care Needed'"></p-tag>
+        </div>
+
       </p-card>
     </div>
   </ng-container>

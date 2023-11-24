@@ -11,18 +11,24 @@ export class LoginComponent implements OnInit{
   isLoginMode = true
   email: string;
   password: string;
-  message: string;
   confirmPassword: string;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   async onSubmit() {
       if (this.isLoginMode) {
-        await this.authService.login(this.email, this.password);
-       await this.router.navigate(['/plants']);
+        await this.authService.login(this.email, this.password).then(
+          ()=>{
+            this.router.navigate(['/plants']);
+          }
+        );
+
       } else {
-        await this.authService.register(this.email, this.password);
-        await this.router.navigate(['/plants']);
+        await this.authService.register(this.email, this.password). then(
+          ()=>{
+            this.router.navigate(['/plants']);
+          }
+        );
       }
   }
 

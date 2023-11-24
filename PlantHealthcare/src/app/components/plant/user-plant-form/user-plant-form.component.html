@@ -14,8 +14,8 @@
     </div>
     <div *ngFor="let device of devices" style="margin-top: 3em">
       <div style="display: flex; gap:1em">
-        <label style="margin-bottom: 0" [for]="device.id+''">{{device.name}}:</label>
-        <p-checkbox [(ngModel)]="selectedDevices" [inputId]="device.id+''" name="group1" [value]="device"></p-checkbox>
+        <label style="margin-bottom: 0" [for]="device._id+''">{{device.name}}:</label>
+        <p-checkbox [(ngModel)]="selectedDevices" [inputId]="device._id+''" name="group1" [value]="device"></p-checkbox>
       </div>
     </div>
     <div class="footer">

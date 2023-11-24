@@ -29,6 +29,7 @@ export class DevicesListComponent implements OnInit{
 export class Device {
   name: string;
   type: string;
-  id?: string;
+  _id?: string;
   user_id?: string;
+  plant_id?: string
 }

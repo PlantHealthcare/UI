@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'plants',canActivate: [AuthGuard],  component: UserPlantsComponent },
   { path: 'plant-database',canActivate: [AuthGuard],  component: PlantDatabaseComponent },
   { path: 'add-plant-form',canActivate: [AuthGuard],  component: AddPlantSpecieFormComponent },
+  { path: 'add-user-plant-form/:plantId',canActivate: [AuthGuard],  component: UserPlantFormComponent },
   { path: 'add-user-plant-form',canActivate: [AuthGuard],  component: UserPlantFormComponent },
   { path: 'devices',canActivate: [AuthGuard],  component: DevicesListComponent },
   { path: 'device-form',canActivate: [AuthGuard],  component: DeviceFormComponent },

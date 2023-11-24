@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MongoService} from "../../services/mongo.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
 import {Device} from "../../device/devices-list/devices-list.component";
-import {PlantSpecies} from "../plant-database/plant-database.component";
+import {Plant, PlantSpecies} from "../plant-database/plant-database.component";
 
 @Component({
   selector: 'app-user-plant-form',
@@ -11,20 +11,31 @@ import {PlantSpecies} from "../plant-database/plant-database.component";
   styleUrls: ['./user-plant-form.component.scss']
 })
 export class UserPlantFormComponent implements OnInit {
-  userPlantRequest: any;
+  userPlantRequest: Plant;
   plantSpecies: PlantSpecies[] = [];
-  choosenPlantSpiece: PlantSpecies
+  choosenPlantSpiece: PlantSpecies;
   devices:Device[] = [];
   plantName = ''
-  selectedDevices: Device[];
-  constructor(private mongo: MongoService, private route: Router, private auth: AuthService) {
+  selectedDevices: Device[] = [];
+  plantId:string | null;
+  isModify = false;
+  loadedPlant:Plant;
+
+  constructor(private mongo: MongoService, private route: Router, private auth: AuthService,private activatedRoute: ActivatedRoute) {
   }
 
   async ngOnInit() {
     this.plantSpecies = await this.mongo.getPlantSpecies();
     this.devices = await this.mongo.listUserDevices();
-    console.log(this.devices)
     this.choosenPlantSpiece = this.plantSpecies[0];
+    this.plantId = this.activatedRoute.snapshot.paramMap.get('plantId') ? this.activatedRoute.snapshot.paramMap.get('plantId') : null;
+    this.isModify = !!this.plantId;
+    if( this.isModify && this.plantId){
+     this.loadedPlant = await this.mongo.getPlant(this.plantId);
+     this.plantName = this.loadedPlant.name;
+     this.selectedDevices = this.loadedPlant.devices;
+     this.choosenPlantSpiece = this.loadedPlant.plantSpecie;
+    }
   }
 
   async onSubmit() {
@@ -32,9 +43,18 @@ export class UserPlantFormComponent implements OnInit {
       name: this.plantName,
       plantSpecie: this.choosenPlantSpiece,
       devices: this.selectedDevices,
-      user_id: this.auth.userValue.user_id
+      user_id: this.auth.userValue.user_id,
+      careNeeded: !!this.loadedPlant ? this.loadedPlant.careNeeded : false,
+      temperature: !!this.loadedPlant ? this.loadedPlant.temperature : '0',
+      humidity: !!this.loadedPlant ? this.loadedPlant.humidity : '0',
+      light: !!this.loadedPlant ? this.loadedPlant.light : '0'
     }
-    await this.mongo.addUserPlant(this.userPlantRequest);
+    if(this.isModify && this.plantId){
+      await this.mongo.modifyUserPlant(this.userPlantRequest ,this.plantId);
+    }else{
+      await this.mongo.addUserPlant(this.userPlantRequest);
+    }
+
     this.route.navigate(['/plants'])
 
   }
@@ -43,11 +63,4 @@ export class UserPlantFormComponent implements OnInit {
     this.route.navigate(['/plants'])
   }
 
-}
-
-export interface UserPlantRequest {
-  name: string,
-  plantSpecie: PlantSpecies,
-  devices: any [],
-  user_id:string
 }

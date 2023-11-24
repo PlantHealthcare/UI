@@ -37,17 +37,14 @@ export class PlantDatabaseComponent implements OnInit {
 export interface Plant {
   _id?: string;
   name: string;
-  light_mmol?: number;
-  light_lux?: number;
-  temp?: number;
-  soil_moist?: number;
-  soil_ec?: number;
-  plantspecies_id?: string;
   user_id?: string;
   imageURL?: string;
   careNeeded?: boolean;
   plantSpecie: PlantSpecies;
-  device: Device[]
+  devices: Device[];
+  temperature: string;
+  humidity: string;
+  light: string;
 }
 
 
