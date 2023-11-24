@@ -10,7 +10,7 @@
       <p-card title="{{ plant.name }}">
         <div class="header-in-card">
           <h5>{{ plant.name }}</h5>
-          <p-button (click)="deletePlant(plant._id)" [style]="{'padding':'0', 'height':'1.5em', 'width':'1.5em'}"
+          <p-button (click)="deletePlant(plant._id)" [style]="{'padding':'0', 'height':'1.5em', 'width':'1.5em'}" [title]="'Delete plant'"
                     icon="pi pi-times" styleClass="p-button-danger"></p-button>
         </div>
         <div>
@@ -20,15 +20,14 @@
         <div class="plant-data-div">
           <div>
             <h4>Status</h4>
-            <div> Temperature: {{ plant.temperature }}</div>
-            <div> Humidity: {{ plant.humidity }}</div>
-            <div> Light: {{ plant.light }}</div>
+            <div> Temperature: {{ plant.temperature }} °C</div>
+            <div> Humidity: {{ plant.humidity }} %</div>
+            <div> Soil moisture: {{ plant.soil_moisture }} %</div>
           </div>
           <p-tag *ngIf="plant.careNeeded !== undefined" [severity]="plant.careNeeded ? 'danger' : 'success'"
                  [style]="{'margin-left': '2em','margin-top':'2em',}"
                  [value]="plant.careNeeded ? 'Care Needed' : 'No Care Needed'"></p-tag>
         </div>
-
       </p-card>
     </div>
   </ng-container>

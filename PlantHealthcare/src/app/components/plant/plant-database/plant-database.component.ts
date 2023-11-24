@@ -44,7 +44,7 @@ export interface Plant {
   devices: Device[];
   temperature: string;
   humidity: string;
-  light: string;
+  soil_moisture: string;
 }
 
 

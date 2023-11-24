@@ -3,22 +3,29 @@ import {Device} from "../devices-list/devices-list.component";
 import {Router} from "@angular/router";
 import {MongoService} from "../../services/mongo.service";
 import {AuthService} from "../../services/auth/auth.service";
+import {User} from "../../user/user-list/user-list.component";
 
 @Component({
   selector: 'app-device-form', templateUrl: './device-form.component.html', styleUrls: ['./device-form.component.scss']
 })
 export class DeviceFormComponent implements OnInit {
-  device: Device = {name: '', type: 'Type 1', user_id: this.auth.userValue.user_id};
-  deviceTypes: { label: string, value: string }[] = [{label: 'Type 1', value: 'Type 1'}, {label: 'Type 2', value: 'Type 2'}, {label: 'Type 3', value: 'Type 3'}];
-
+  device: Device = {name: '', description: ''};
+  users: any[] = [];
+  selectedUser: User
   constructor(private route: Router, private mongo: MongoService, private auth: AuthService) {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.users = await this.mongo.listUsers();
+    this.selectedUser = this.users[0].user_id
   }
 
   async onSubmit() {
+    this.device.user_id = this.selectedUser.user_id
+    this.device.useremail = this.users.find((usr) => {
+      return usr.user_id === this.device.user_id
+    })?.email
     await this.mongo.addUserDevices(this.device)
     this.route.navigate(['/devices']);
   }

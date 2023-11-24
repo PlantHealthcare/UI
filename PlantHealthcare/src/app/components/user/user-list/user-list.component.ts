@@ -18,7 +18,12 @@ export class UserListComponent implements OnInit {
     {
       label: 'plant database administrator',
       value: 'plant-database-admin',
-    }];
+    },
+    {
+      label: 'device manufacturer',
+      value: 'device-manufacturer',
+    },
+  ];
 
   constructor(private mongoService: MongoService, public auth: AuthService) {
   }
@@ -43,5 +48,5 @@ export interface User {
   role: RoleType
 }
 
-export type RoleType = 'admin' | 'default' | 'plant-database-admin'
+export type RoleType = 'admin' | 'default' | 'plant-database-admin' | 'device-manufacturer'
 

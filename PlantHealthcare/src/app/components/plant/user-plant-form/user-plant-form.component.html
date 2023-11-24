@@ -9,7 +9,7 @@
     </div>
     <div class="p-field">
       <label for="type">Type</label>
-      <p-dropdown [(ngModel)]="choosenPlantSpiece" [appendTo]="'body'" [options]="plantSpecies" [showClear]="true"
+      <p-dropdown [disabled]="isModify" [(ngModel)]="choosenPlantSpiece" [appendTo]="'body'" [options]="plantSpecies" [showClear]="true"
                   id="type" optionLabel="name"></p-dropdown>
     </div>
     <div *ngFor="let device of devices" style="margin-top: 3em">

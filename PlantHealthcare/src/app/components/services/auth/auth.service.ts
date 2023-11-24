@@ -30,12 +30,14 @@ export class AuthService {
       const app = new Realm.App({id: "planthealthcareapp-rmwdj"});
       const credentials = Realm.Credentials.emailPassword(email, password);
       this.user = await app.logIn(credentials);
-      await this.mongoService.setDatabaseConnection(app, this.userValue);
-      const role = await this.getRole(app.currentUser?.id.toString());
-      this.userValue = {email: email, role: role, user_id: app.currentUser?.id.toString()};
-      this.userSubject.next(this.userValue);
-      this.mongoService.setUserValue(this.userValue);
-      console.log(this.userValue)
+      await this.mongoService.setDatabaseConnection(app, this.userValue).then(
+        async () => {
+          const role = await this.getRole(app.currentUser?.id.toString());
+          this.userValue = {email: email, role: role, user_id: app.currentUser?.id.toString()};
+          this.userSubject.next(this.userValue);
+          this.mongoService.setUserValue(this.userValue);
+        }
+      );
     } catch (error: unknown) {
       const err = error as Error;
       alert(err.message)
@@ -49,11 +51,15 @@ export class AuthService {
       await app.emailPasswordAuth.registerUser({email, password});
       const credentials = Realm.Credentials.emailPassword(email, password);
       this.user = await app.logIn(credentials);
-      await this.mongoService.setDatabaseConnection(app, this.userValue);
-      const role = await this.getRole(app.currentUser?.id.toString());
-      this.userValue = {email: email, role: role, user_id: app.currentUser?.id.toString()};
-      this.userSubject.next(this.userValue);
-      this.mongoService.setUserValue(this.userValue);
+      await this.mongoService.setDatabaseConnection(app, this.userValue).then(
+        async () => {
+          const role = await this.getRole(app.currentUser?.id.toString());
+          this.userValue = {email: email, role: role, user_id: app.currentUser?.id.toString()};
+          this.userSubject.next(this.userValue);
+          this.mongoService.setUserValue(this.userValue);
+        }
+        );
+
       console.log(this.userValue)
     } catch (error) {
       const err = error as Error;
@@ -63,7 +69,7 @@ export class AuthService {
   }
 
   async getRole(id = '') {
-    const data = await this.mongoService.getForUser(id);
+    const data = await this.mongoService.getUser(id);
     console.log(data.role)
     return data.role
   }

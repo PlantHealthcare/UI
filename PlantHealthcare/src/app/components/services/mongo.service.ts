@@ -19,13 +19,16 @@ export class MongoService {
     if (app.currentUser) {
       this.mongoConnection = await app.currentUser.mongoClient("mongodb-atlas");
     }
+    return this.mongoConnection;
   }
 
   //endpoints
 
 
-  async getForUser(id: string) {
-    return await this.mongoConnection.db("PlantHealthcare").collection("users").findOne({user_id: id});
+  async getUser(id: string) {
+    const collection = await this.mongoConnection.db("PlantHealthcare").collection("users");
+    const users = await collection.find();
+    return users.find((usr:any)=>{return usr.user_id === id})
   }
   async listUsers() {
     const collection = this.mongoConnection.db("PlantHealthcare").collection("users");
@@ -114,49 +117,54 @@ export class MongoService {
 
   async modifyUserPlant(userPlantRequest: Plant, updateId = '') {
     let updatedPlant: Plant
-    const collection_user_plants = this.mongoConnection.db("PlantHealthcare").collection("userplants");
-    await collection_user_plants.updateOne(
-      {_id: new ObjectId (updateId)}, // Filter
-      {$set: userPlantRequest} // Update
-    );
-    if (updateId) {
-      updatedPlant = await this.getPlant(updateId);
-      const collection_devices = this.mongoConnection.db("PlantHealthcare").collection("userdevices");
-      const allDevicesOfUser: Device[] = await this.listUserDevices();
-      for (const device of allDevicesOfUser) {
-        if ( !!updatedPlant.devices.find((dev) => {return dev._id === device._id})) {
-          await collection_devices.updateOne(
-            {_id: device._id}, // Filter
-            {$set: {plant_id: updatedPlant._id}} // Update
-          );
-        } else {
-          if (device.plant_id === updatedPlant._id) {
-            await collection_devices.updateOne(
-              {_id: device._id}, // Filter
-              {$set: {plant_id: null}} // Update
-            );
-          }
+    await this.updatePlantProperties(updateId, userPlantRequest); // todo
+    updatedPlant = await this.getPlant(updateId);
+
+    const collection_devices = this.mongoConnection.db("PlantHealthcare").collection("userdevices");
+    const allDevicesOfUser: Device[] = await this.listUserDevices();
+    await this.updateDevicesPlantIds(allDevicesOfUser, updatedPlant, collection_devices);
+  }
+
+  private async updateDevicesPlantIds(allDevicesOfUser: Device[], updatedPlant: Plant, collection_devices:any) {
+    for (const device of allDevicesOfUser) {
+      const isDeviceAmongPlantDevices: boolean = !!updatedPlant.devices.find((updatedPlantDevice) => {
+        return updatedPlantDevice._id?.toString() === device._id?.toString()
+      })
+      if (isDeviceAmongPlantDevices) {
+        await this.assignDeviceToPlant(collection_devices, device, updatedPlant);
+      } else {
+        if (device.plant_id?.toString() === updatedPlant._id?.toString()) {
+          await this.removeDeviceFromPlant(collection_devices, device);
         }
-      }
-      const updatedDevices = await this.listPlantDevices(updateId);
-      await collection_user_plants.updateOne(
-        {_id: updatedPlant._id}, // Filter
-        {$set: {devices: updatedDevices}} // Update
-      );
-      // Remove devices from other plants that have the same ID as the updated devices
-      // and where the plant ID is not the same as the updateId
-      const otherPlants = await collection_user_plants.find({_id: {$ne: new ObjectId(updateId)}});
-      for (const plant of otherPlants) {
-        const filteredDevices = plant.devices.filter((dev:any) => {
-          return updatedDevices.find((updDev: any) => updDev._id === dev._id);
-        });
-        await collection_user_plants.updateOne(
-          {_id: plant._id}, // Filter
-          {$set: {devices: filteredDevices}} // Update
-        );
       }
     }
   }
 
+  private async removeDeviceFromPlant(collection_devices: any, device: Device) {
+    await collection_devices.updateOne(
+      {_id: device._id}, // Filter
+      {$set: {plant_id: null}} // Update
+    );
+  }
 
+  private async assignDeviceToPlant(collection_devices: any, device: Device, updatedPlant: Plant) {
+    await collection_devices.updateOne(
+      {_id: device._id}, // Filter
+      {$set: {plant_id: updatedPlant._id}} // Update
+    );
+  }
+
+  private async updatePlantProperties(updateId: string, userPlantRequest: Plant) {
+    const collection_user_plants = this.mongoConnection.db("PlantHealthcare").collection("userplants");
+    await collection_user_plants.updateOne(
+      {_id: new ObjectId(updateId)}, // Filter
+      {$set: userPlantRequest} // Update
+    );
+    return collection_user_plants;
+  }
+
+  async removeDevice(deviceId: ObjectId) {
+    const collection = this.mongoConnection.db("PlantHealthcare").collection("userdevices");
+    return await collection.deleteOne({_id: deviceId});
+  }
 }

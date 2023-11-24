@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {MongoService} from "../../services/mongo.service";
+import {User} from "../../user/user-list/user-list.component";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-devices-list',
@@ -9,16 +11,17 @@ import {MongoService} from "../../services/mongo.service";
 })
 export class DevicesListComponent implements OnInit{
   devices:Device[] = [];
+  users: User[] = []
 
-
-  constructor(private route: Router, private mongoService: MongoService) {
+  constructor(private route: Router, private mongoService: MongoService, public auth:AuthService) {
   }
   async ngOnInit() {
     this.devices = await this.mongoService.listUserDevices();
   }
 
-  removeDevice(device: any) {
-    console.log(device)
+  async removeDevice(device: any) {
+    await this.mongoService.removeDevice(device._id);
+    this.devices = await this.mongoService.listUserDevices();
   }
 
   addDevice() {
@@ -28,7 +31,8 @@ export class DevicesListComponent implements OnInit{
 
 export class Device {
   name: string;
-  type: string;
+  description: string;
+  useremail?:string;
   _id?: string;
   user_id?: string;
   plant_id?: string

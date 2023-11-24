@@ -4,8 +4,14 @@
     <input pInputText id="name" [(ngModel)]="device.name" class="p-inputtext-sm p-inputtext-outlined" required>
   </div>
   <div class="p-field">
+    <label for="description">Description</label>
+    <textarea [(ngModel)]="device.description" cols="30" id="description" pInputTextarea rows="3"></textarea>
+
+  </div>
+
+  <div class="p-field">
     <label for="type">Type</label>
-    <p-dropdown [appendTo]="'body'" id="type" [options]="deviceTypes" [(ngModel)]="device.type" [showClear]="true" [optionValue]="deviceTypes[0].value" optionLabel="label"></p-dropdown>
+    <p-dropdown [appendTo]="'body'" id="type" [options]="users" [(ngModel)]="selectedUser" [showClear]="true" optionLabel="email"></p-dropdown>
   </div>
   <div class="footer">
     <p-button label="Submit" icon="pi pi-check"  styleClass="p-button-success"  [disabled]="!device.name || device.name === ''" (click)="onSubmit()"></p-button>

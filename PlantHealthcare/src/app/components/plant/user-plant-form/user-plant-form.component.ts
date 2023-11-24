@@ -33,7 +33,7 @@ export class UserPlantFormComponent implements OnInit {
     if( this.isModify && this.plantId){
      this.loadedPlant = await this.mongo.getPlant(this.plantId);
      this.plantName = this.loadedPlant.name;
-     this.selectedDevices = this.loadedPlant.devices;
+     this.selectedDevices = this.devices.filter((deviceFormAll)=> {return deviceFormAll.plant_id?.toString() === this.plantId}) // initialize selected devices
      this.choosenPlantSpiece = this.loadedPlant.plantSpecie;
     }
   }
@@ -47,7 +47,7 @@ export class UserPlantFormComponent implements OnInit {
       careNeeded: !!this.loadedPlant ? this.loadedPlant.careNeeded : false,
       temperature: !!this.loadedPlant ? this.loadedPlant.temperature : '0',
       humidity: !!this.loadedPlant ? this.loadedPlant.humidity : '0',
-      light: !!this.loadedPlant ? this.loadedPlant.light : '0'
+      soil_moisture: !!this.loadedPlant ? this.loadedPlant.soil_moisture : '0'
     }
     if(this.isModify && this.plantId){
       await this.mongo.modifyUserPlant(this.userPlantRequest ,this.plantId);
