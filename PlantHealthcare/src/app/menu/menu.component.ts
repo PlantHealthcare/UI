@@ -24,7 +24,7 @@ export class MenuComponent implements OnInit {
       {label: 'Plants', icon: 'pi pi-box', routerLink: ['/plants'], visible: this.authService.userRole ==='admin' || this.authService.userRole ==='default'},
       {label: 'Test', icon: 'pi pi-check-square', routerLink: ['/test']},
       {label: 'Devices', icon: 'pi pi-cog', routerLink: ['/devices'], visible: this.authService.userRole ==='default' || this.authService.userRole ==='admin' || this.authService.userRole === 'device-manufacturer'},
-      {label: 'Plant database', icon: 'pi pi-check-square', routerLink: ['/plant-database'],visible: this.authService.userRole ==='device-manufacturer'},
+      {label: 'Plant database', icon: 'pi pi-check-square', routerLink: ['/plant-database'],visible: this.authService.userRole ==='plant-database-admin' || this.authService.userRole ==='admin'},
       {label: 'Users', icon: 'pi pi-cog', routerLink: ['/users'], visible: this.authService.userRole ==='admin'}
     ];
   }
