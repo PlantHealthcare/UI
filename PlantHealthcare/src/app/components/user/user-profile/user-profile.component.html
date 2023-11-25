@@ -9,8 +9,8 @@
             <p>{{ authService.userValue.role }}</p>
           </div>
           <div style="display:flex; justify-content: space-between">
-            <p-button label="Plants" icon="pi pi-search" styleClass="p-button-success" (click)="redirectToPlants()" ></p-button>
-            <p-button label="Devices" icon="pi pi-cog" styleClass="p-button-help" (click)="redirectToDevices()"></p-button>
+            <p-button *ngIf="authService.userRole === 'admin' || authService.userRole === 'default'" label="Plants" icon="pi pi-search" styleClass="p-button-success" (click)="redirectToPlants()" ></p-button>
+            <p-button *ngIf="authService.userRole === 'admin' || authService.userRole === 'default' || authService.userRole === 'device-manufacturer'" label="Devices" icon="pi pi-cog" styleClass="p-button-help" (click)="redirectToDevices()"></p-button>
           </div>
         </div>
       </div>

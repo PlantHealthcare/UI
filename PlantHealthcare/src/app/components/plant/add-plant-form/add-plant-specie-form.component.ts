@@ -42,10 +42,10 @@ export class AddPlantSpecieFormComponent{
   }
   async onSubmit(){
     await this.mongo.addPlantSpecie(this.plantSpecie);
-    await this.route.navigate(['/plants']);
+    await this.route.navigate(['/plant-database']);
   }
 
   back() {
-    this.route.navigate(['/plants']);
+    this.route.navigate(['/plant-database']);
   }
 }

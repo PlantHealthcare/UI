@@ -19,14 +19,14 @@ export class LoginComponent implements OnInit{
       if (this.isLoginMode) {
         await this.authService.login(this.email, this.password).then(
           ()=>{
-            this.router.navigate(['/plants']);
+            this.router.navigate(['/profile']);
           }
         );
 
       } else {
         await this.authService.register(this.email, this.password). then(
           ()=>{
-            this.router.navigate(['/plants']);
+            this.router.navigate(['/profile']);
           }
         );
       }

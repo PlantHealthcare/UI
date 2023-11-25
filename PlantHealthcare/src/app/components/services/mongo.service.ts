@@ -11,11 +11,14 @@ import App = Realm.App;
 export class MongoService {
   mongoConnection: any
   userValue:User;
+  app: App<Realm.DefaultFunctionsFactory & Realm.BaseFunctionsFactory>;
+
   constructor() {
   }
 
   async setDatabaseConnection(app: App<Realm.DefaultFunctionsFactory & Realm.BaseFunctionsFactory, SimpleObject>, user: User) {
     this.userValue = user;
+    this.app = app;
     if (app.currentUser) {
       this.mongoConnection = await app.currentUser.mongoClient("mongodb-atlas");
     }
@@ -27,8 +30,7 @@ export class MongoService {
 
   async getUser(id: string) {
     const collection = await this.mongoConnection.db("PlantHealthcare").collection("users");
-    const users = await collection.find();
-    return users.find((usr:any)=>{return usr.user_id === id})
+    return await collection.findOne({user_id: id});
   }
   async listUsers() {
     const collection = this.mongoConnection.db("PlantHealthcare").collection("users");
@@ -88,6 +90,11 @@ export class MongoService {
     return await collection.find({user_id: this.userValue.user_id});
   }
 
+  async listAllDevices() {
+    const collection = this.mongoConnection.db("PlantHealthcare").collection("userdevices");
+    return await collection.find();
+  }
+
   async listPlantDevices(plantId = '') {
     const collection = this.mongoConnection.db("PlantHealthcare").collection("userdevices");
     return await collection.find({plant_id: plantId});
@@ -100,6 +107,8 @@ export class MongoService {
 
   async removeUser(userId: string) {
     const collection = this.mongoConnection.db("PlantHealthcare").collection("users");
+    const user = this.app.allUsers[userId];
+    await this.app.removeUser(user)
     return await collection.deleteOne({user_id: userId});
   }
 

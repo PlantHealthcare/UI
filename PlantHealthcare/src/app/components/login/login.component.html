@@ -1,11 +1,11 @@
 <form (ngSubmit)="onSubmit()" *ngIf="isLoginMode" #loginForm="ngForm">
   <div class="p-field">
-    <label for="email">Username:</label>
-    <input required email [(ngModel)]="email" id="email" name="username" pInputText>
+    <label for="email">E-mail:</label>
+    <input required email [(ngModel)]="email" id="email" name="email" pInputText>
   </div>
   <div class="p-field">
     <label for="password">Password:</label>
-    <input [(ngModel)]="password" required id="password" name="password" pInputText>
+    <input [(ngModel)]="password" required id="password" name="password" type="password" pInputText>
   </div>
   <div class="footer">
     <button [disabled]="loginForm.invalid" label="Login" pButton type="submit"></button>
@@ -16,8 +16,8 @@
 
 <form (ngSubmit)="onSubmit()" *ngIf="!isLoginMode" #registerForm="ngForm">
   <div class="p-field">
-    <label>Username:</label>
-    <input [(ngModel)]="email" name="username" pInputText required>
+    <label>E-mail:</label>
+    <input [(ngModel)]="email" name="email" email pInputText required>
   </div>
   <div class="p-field">
     <label>Password:</label>

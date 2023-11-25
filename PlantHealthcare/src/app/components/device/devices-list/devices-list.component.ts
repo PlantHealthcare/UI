@@ -16,12 +16,22 @@ export class DevicesListComponent implements OnInit{
   constructor(private route: Router, private mongoService: MongoService, public auth:AuthService) {
   }
   async ngOnInit() {
+    await this.listDevices();
+  }
+
+  private async listDevices() {
+    if(this.auth.userRole === 'device-manufacturer'){
+    this.devices = await this.mongoService.listAllDevices();
+
+    }else{
     this.devices = await this.mongoService.listUserDevices();
+
+    }
   }
 
   async removeDevice(device: any) {
     await this.mongoService.removeDevice(device._id);
-    this.devices = await this.mongoService.listUserDevices();
+    await this.listDevices();
   }
 
   addDevice() {
